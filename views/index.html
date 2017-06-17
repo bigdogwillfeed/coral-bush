@@ -3,7 +3,7 @@
   <head>
     <title>Random Words</title>
     <meta name="description" content="Random Word Web Service">
-    <link id="favicon" rel="icon" href="https://hyperdev.com/favicon.ico" type="image/x-icon">
+    <link id="favicon" rel="icon" href="https://glitch.com/favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,52 +13,57 @@
     <header>
       <h1>
         a web service for random words
+        <div class="glitchButton"></div>
       </h1>
+      
     </header>
 
     <main>
       <p>So you want some random words, do you?  Try these:</p>
       <div class="container">
         <div class="left">
-          <p>random-word: returns a random english word with length between min and max</p>
+          <p><strong>random-word</strong>: returns a random english word with length between min and max</p>
           <form id="random-word">
-            <label>min:</label>
-            <input name="min" type="number" min="0" max="20" value="7">
-            <label>max:</label>
-            <input name="max" type="number" min="1" max="100" value="15">
-            <input class="result" readonly>
+            <div class="param">
+              <label>min:</label>
+              <input name="min" type="number" min="0" max="20" value="7">
+            </div>
+            <div class="param">
+              <label>max:</label>
+              <input name="max" type="number" min="1" max="100" value="15">
+            </div>
             <input type="submit" class="submit" value="try it out">
+            <input class="result" readonly>
           </form>
         </div>
         <div class="right">
-          <p>random-isogram: returns a random english
+          <p><strong>random-isogram</strong>: returns a random english
           <a href="https://en.wikipedia.org/wiki/Isogram"
              title="a word or phrase without a repeating letter"
              target="_blank">isogram</a>
           with length between min and max</p>
           <form id="random-isogram">
-            <label>min:</label>
-            <input name="min" type="number" min="0" max="15" value="7">
-            <label>max:</label>
-            <input name="max" type="number" min="1" max="100" value="12">
-            <input class="result" readonly>
+            <div class="param">
+              <label>min:</label>
+              <input name="min" type="number" min="0" max="15" value="7">
+            </div>
+            <div class="param">
+              <label>max:</label>
+              <input name="max" type="number" min="1" max="100" value="12">
+            </div>
             <input type="submit" class="submit" value="try it out">
+            <input class="result" readonly>
           </form>
         </div>
       </div>
     </main>
-
-    <footer>
-      <a href="https://hyperdev.com">
-        Remix this in HyperDev
-      </a>
-    </footer>
 
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
     <script src="/client.js"></script>
+    <script src="https://button.glitch.me/button.js"></script>
 
   </body>
 </html>
