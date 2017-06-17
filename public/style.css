@@ -22,35 +22,53 @@ p {
   text-align: center;
 }
 
-div {
+div.container {
     color: #fff;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     padding: 10px;
 }
 
+.glitchButton {
+  float: right;
+}
+
 .container {
-    background-color:#2E4272;
-    display:flex;
+    background-color: #2E4272;
+    display: flex;
+}
+
+.container p {
+  padding: 5px;
 }
 
 .left {
-    background-color:#4F628E;
-    width: 45vw;
+    background-color: #4F628E;
+    min-width: 50%;
 }
 
 .right {
-    background-color:#7887AB;
+    background-color: #7887AB;
     flex-grow: 1;
 }
 
 form {
-  margin-bottom: 25px;
   padding: 15px;
   background-color: #2E4272;
   display: block;
   width: 80%;
   border-radius: 3px;
-  margin: 0px auto;
+  margin: 0px auto 25px auto;
+}
+
+.param {
+  height: 40px;
+  display: flex;
+  width: 100%;
+}
+
+label {
+  padding: 5px;
+  min-width: 6ch;
 }
 
 input {
@@ -68,7 +86,7 @@ input.submit {
   border-radius: 3px;
   background-color: lightgrey;
   border: 1px solid grey;
-  box-shadow: 5px 5px teal;
+  box-shadow: 5px 5px #AB9C78;
   cursor: pointer;
 }
 
@@ -76,27 +94,16 @@ input.submit:active {
   box-shadow: none;
 }
 
-input.error {
-  background-color: red;
-  color: white;
-  font-weight: bold;
-}
-
 input.result {
+  margin-top: 30px;
+  background-color: transparent;
+  border: none;
   color: darkgray;
   text-align: center;
 }
 
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
-}
-
-footer > a {
-  color: #BBBBBB;
-}
-
-.nicejob {
-  text-decoration: line-through;
+input.error {
+  background-color: red;
+  color: white;
+  font-weight: bold;
 }
