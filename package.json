@@ -1,13 +1,10 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "my-hyperdev-app",
-  "version": "0.0.1",
-  "description": "What am I about?",
+  "name": "coral-bush",
+  "version": "1.0.1",
+  "description": "Generates random words",
   "main": "server.js",
   "scripts": {
-    "start": "node --use-strict server.js"
+    "start": "NODE_ENV=production node --use-strict server.js"
   },
   "dependencies": {
     "express": "^4.15.3",
@@ -18,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://hyperdev.com/#!/project/welcome-project"
+    "url": "https://github.com/bigdogwillfeed/coral-bush"
   },
   "keywords": [
     "node",

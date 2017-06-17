@@ -1,5 +1,3 @@
-/* global Set */
-
 // init project
 var express = require('express'),
     app = express(),
@@ -12,6 +10,14 @@ const REALLY_SMALL_WORD = 2,
       BASE_10 = 10
 
 
+app.use('*', (request, response, next) => {
+  response.header({
+    'X-Powered-By': 'Glitch',
+    'Access-Control-Allow-Origin': '*'
+  })
+  next()
+})
+
 app.use(express.static('public'))
 
 app.get("/", (request, response) => {
@@ -21,6 +27,16 @@ app.get("/", (request, response) => {
 randomWordMiddleware ("/random-word",    wordFn(),          REALLY_BIG_WORD)
 randomWordMiddleware ("/random-isogram", wordFn(isIsogram), REALLY_BIG_ISOGRAM)
 
+app.use('*', (err, req, res, next) => {
+  if (req.xhr) {
+    console.error(err.stack)
+    res.status(500).send('uh oh!')
+  } else {
+    next(err)
+  }
+})
+
+
 function randomWordMiddleware (route, fn, defMax) {
   app.use(route, (request, response, next) => {
     var min = parseInt(request.query.min, BASE_10) || 0,
@@ -29,7 +45,6 @@ function randomWordMiddleware (route, fn, defMax) {
       response.status(400).send('really?')
     } else {
       fn(min, max).then(word => {
-        response.setHeader('Access-Control-Allow-Origin', '*')
         response.send(word)
       })
       .catch(next)
@@ -51,6 +66,7 @@ function wordFn(predicate) {
 }
 
 function isIsogram(word) {
+  /* global Set */
   return word.length === (new Set(word)).size
 }
 

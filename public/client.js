@@ -1,7 +1,7 @@
 $(function() {
   
   function setResult(form, result, error) {
-    var input = $(form).find('.result').first()
+    var input = $(form).find('.result')
     input.val(result)
     if (error) {
       input.addClass('error')
