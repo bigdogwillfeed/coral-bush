@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "express": "^4.15.3",
-    "random-word": "^2.0.0"
+    "random-word": "^2.0.0",
+    "compression": "^1.6.2"
   },
   "engines": {
     "node": "8"

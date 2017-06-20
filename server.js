@@ -1,5 +1,6 @@
 // init project
 var express = require('express'),
+    compression = require('compression'),
     app = express(),
     randomWord = require('random-word')
 
@@ -18,11 +19,9 @@ app.use('*', (request, response, next) => {
   next()
 })
 
-app.use(express.static('public'))
+app.use(compression())
 
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + '/views/index.html')
-})
+app.use(express.static('public', { maxage: '1d' }))
 
 randomWordMiddleware ("/random-word",    wordFn(),          REALLY_BIG_WORD)
 randomWordMiddleware ("/random-isogram", wordFn(isIsogram), REALLY_BIG_ISOGRAM)
