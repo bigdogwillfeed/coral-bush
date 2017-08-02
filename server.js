@@ -2,7 +2,8 @@
 var express = require('express'),
     compression = require('compression'),
     app = express(),
-    randomWord = require('random-word')
+    randomWord = require('random-word'),
+    Negotiator = require('negotiator')
 
 const REALLY_SMALL_WORD = 2,
       REALLY_BIG_ISOGRAM = 15,
@@ -43,12 +44,28 @@ function randomWordMiddleware (route, fn, defMax) {
     if (min > max || max < REALLY_SMALL_WORD || min > defMax) {
       response.status(400).send('really?')
     } else {
-      fn(min, max).then(word => {
-        response.send(word)
-      })
-      .catch(next)
+      fn(min, max)
+        .then(word => render(word, request, response))
+        .catch(next)
     }
   })
+}
+
+function render(word, req, res) {
+  let negotiator = new Negotiator(req)
+  switch (negotiator.mediaType(['text/html', 'text/plain', 'application/json'])) {
+    case 'application/json': res.json(word); break;
+    case 'text/html': res.send(`
+<html>
+  <head>
+    <meta property="og:title" content="a web service for random words" />
+    <meta property="og:description" content="${word}" />
+  </head>
+  <body>${word}</body>
+</html>`); break;
+    case 'text/plain': 
+    default: res.type('text/plain'); res.send(word); break;
+  }
 }
 
 function wordFn(predicate) {
