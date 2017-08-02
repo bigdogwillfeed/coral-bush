@@ -1,9 +1,3 @@
-/* styles */
-/* called by your view template */
-
-/* You might want to try something fancier: */
-/* less: http://lesscss.org/ */
-
 * {
   box-sizing: border-box;
 }
@@ -16,6 +10,8 @@ body {
 h1 {
   font-weight: bold;
   text-align: center;
+  width: 80%;
+  margin: auto;
 }
 
 p {
@@ -99,6 +95,7 @@ input.result {
   background-color: transparent;
   border: none;
   color: darkgray;
+  font-size: 120%;
   text-align: center;
 }
 

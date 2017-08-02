@@ -1,9 +1,9 @@
-/* global Set */
-
 // init project
 var express = require('express'),
+    compression = require('compression'),
     app = express(),
-    randomWord = require('random-word')
+    randomWord = require('random-word'),
+    Negotiator = require('negotiator')
 
 const REALLY_SMALL_WORD = 2,
       REALLY_BIG_ISOGRAM = 15,
@@ -12,14 +12,30 @@ const REALLY_SMALL_WORD = 2,
       BASE_10 = 10
 
 
-app.use(express.static('public'))
-
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + '/views/index.html')
+app.use('*', (request, response, next) => {
+  response.header({
+    'X-Powered-By': 'Glitch',
+    'Access-Control-Allow-Origin': '*'
+  })
+  next()
 })
+
+app.use(compression())
+
+app.use(express.static('public', { maxage: '1d' }))
 
 randomWordMiddleware ("/random-word",    wordFn(),          REALLY_BIG_WORD)
 randomWordMiddleware ("/random-isogram", wordFn(isIsogram), REALLY_BIG_ISOGRAM)
+
+app.use('*', (err, req, res, next) => {
+  if (req.xhr) {
+    console.error(err.stack)
+    res.status(500).send('uh oh!')
+  } else {
+    next(err)
+  }
+})
+
 
 function randomWordMiddleware (route, fn, defMax) {
   app.use(route, (request, response, next) => {
@@ -28,13 +44,28 @@ function randomWordMiddleware (route, fn, defMax) {
     if (min > max || max < REALLY_SMALL_WORD || min > defMax) {
       response.status(400).send('really?')
     } else {
-      fn(min, max).then(word => {
-        response.setHeader('Access-Control-Allow-Origin', '*')
-        response.send(word)
-      })
-      .catch(next)
+      fn(min, max)
+        .then(word => render(word, request, response))
+        .catch(next)
     }
   })
+}
+
+function render(word, req, res) {
+  let negotiator = new Negotiator(req)
+  switch (negotiator.mediaType(['text/html', 'text/plain', 'application/json'])) {
+    case 'application/json': res.json(word); break;
+    case 'text/html': res.send(`
+<html>
+  <head>
+    <meta property="og:title" content="a web service for random words" />
+    <meta property="og:description" content="${word}" />
+  </head>
+  <body>${word}</body>
+</html>`); break;
+    case 'text/plain': 
+    default: res.type('text/plain'); res.send(word); break;
+  }
 }
 
 function wordFn(predicate) {
@@ -51,6 +82,7 @@ function wordFn(predicate) {
 }
 
 function isIsogram(word) {
+  /* global Set */
   return word.length === (new Set(word)).size
 }
 

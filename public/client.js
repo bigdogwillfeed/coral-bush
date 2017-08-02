@@ -1,7 +1,7 @@
 $(function() {
   
   function setResult(form, result, error) {
-    var input = $(form).find('.result').first()
+    var input = $(form).find('.result')
     input.val(result)
     if (error) {
       input.addClass('error')
@@ -13,7 +13,7 @@ $(function() {
   $('form').on('submit', function(event) {
     var form = this
     event.preventDefault()
-    $.get(form.id, $(form).serialize())
+    $.get(form.id, $(form).serialize(), null, 'text')
     .done(function(data) {
       setResult(form, data)
     })
