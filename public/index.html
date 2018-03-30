@@ -8,6 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style.css">
+    <!-- Google Analytics -->
+    <script>
+    (function(r,a,t,i,n,g,s){r['GoogleAnalyticsObject']=n;r[n]=r[n]||function(){
+    (r[n].q=r[n].q||[]).push(arguments)},r[n].l=1*new Date();g=a.createElement(t),
+    s=a.getElementsByTagName(t)[0];g.async=1;g.src=i;s.parentNode.insertBefore(g,s)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-115773386-2', 'auto');
+    ga('send', 'pageview');
+    </script>
   </head>
   <body>
     <header>
@@ -36,8 +46,7 @@
         <div class="right">
           <p><strong>random-isogram</strong>: returns a random english
           <a href="https://en.wikipedia.org/wiki/Isogram"
-             title="a word or phrase without a repeating letter"
-             target="_blank">isogram</a>
+             title="a word or phrase without a repeating letter">isogram</a>
           with length between min and max</p>
           <form id="random-isogram">
             <div class="param">
