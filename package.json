@@ -1,19 +1,19 @@
 {
   "name": "coral-bush",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generates random words",
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node --use-strict server.js"
   },
   "dependencies": {
-    "express": "^4.15.4",
+    "express": "^4.17.1",
     "random-word": "^2.0.0",
-    "compression": "^1.7.0",
-    "negotiator": "^0.6.1"
+    "compression": "^1.7.4",
+    "negotiator": "^0.6.2"
   },
   "engines": {
-    "node": "8.x"
+    "node": "12.x"
   },
   "repository": {
     "type": "git",

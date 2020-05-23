@@ -17,7 +17,7 @@ $(function() {
     .done(function(data) {
       setResult(form, data)
     })
-    .error(function(error) {
+    .fail(function(error) {
       setResult(form, error.responseText, true)
     })
   })
