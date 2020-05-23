@@ -7,7 +7,7 @@ const pkg = require('./package'),
       Negotiator = require('negotiator')
 
 const REALLY_SMALL_WORD = 2,
-      REALLY_BIG_PALENDROME = 9, // seems "rotavator" is the longest one in our word corpus
+      REALLY_BIG_PALINDROME = 9, // seems "rotavator" is the longest one in our word corpus
       REALLY_BIG_ISOGRAM = 15,
       REALLY_BIG_WORD = 25,
       BASE_10 = 10
@@ -31,7 +31,7 @@ app.use(express.static('public', { maxage: '1d' }))
 ///
 randomWordMiddleware ("/random-word",       REALLY_BIG_WORD)
 randomWordMiddleware ("/random-isogram",    REALLY_BIG_ISOGRAM, isIsogram)
-randomWordMiddleware ("/random-palendrome", REALLY_BIG_PALENDROME, isPalendrome)
+randomWordMiddleware ("/random-palindrome", REALLY_BIG_PALINDROME, isPalindrome)
 // totes can add any other routes on any other predicates 😂
 
 function isIsogram(word) {
@@ -39,7 +39,7 @@ function isIsogram(word) {
   return word.length === (new Set(word)).size
 }
 
-function isPalendrome(word) {
+function isPalindrome(word) {
   return word.split('').reverse().join('') == word;
 }
 
